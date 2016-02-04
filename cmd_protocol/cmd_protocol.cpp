@@ -1,3 +1,6 @@
+// Author: Brian Scully
+// Copyright (c) 2016 Agponics
+
 #include <cmd_protocol.h>
 
 boolean read_command(String& cmd)
