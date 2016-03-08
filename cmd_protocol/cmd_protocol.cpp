@@ -42,8 +42,8 @@ unsigned int parse_command(String cmd, unsigned int& switch_index, boolean& enab
       
         int index1 = -1;   // index within the command of the first ':'
         int index2 = -1;   // index within the command of the second ':'
-        String str_idx;    // the desired pump to control (as a string)
-        String str_enable; // whether to enable/disable the pump (as a string)
+        String str_idx;    // the desired relay to control (as a string)
+        String str_enable; // whether to enable/disable the relay (as a string)
         int switch_idx = 0;  // the converted index (from string to int)
         
         do
