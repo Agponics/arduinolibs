@@ -87,7 +87,7 @@ unsigned int parse_command(String cmd, unsigned int& switch_index, boolean& enab
     else
     {
         // invalid
-        DBGMSG("invalid command string")
+        CMD_PROTOCOL_DBGMSG("invalid command string")
     }
 
     return op_type;

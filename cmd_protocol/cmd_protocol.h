@@ -6,8 +6,8 @@
 
 #include <Arduino.h>
 
-#define SERIAL_BAUD 9600     // baud rate for serial transmission (must match up w/ the other side)
-#define READ_DELAY       100 // delay between checks for input from the serial connection 
+#define SERIAL_BAUD 9600 // baud rate for serial transmission (must match up w/ the other side)
+#define READ_DELAY  100  // delay between checks for input from the serial connection 
 
 #ifndef DBGMSG
 #define DBGMSG(msg)
