@@ -15,11 +15,24 @@ void CDs18b20Sensor::set_pin(int pin)
 
 String CDs18b20Sensor::get_status_str()
 {
-    double temp = 0.0;
+    double  temp = 0.0;
+    uint8_t probe_cnt = 0;
     
-    String out = CDevice::get_status_str();
+    String out = "";
 
-    // TODO
+    // have all probes read temp
+    m_dt.requestTemperatures();
+
+    probe_cnt = m_dt.getDeviceCount();
+
+    for (uint8_t i = 0; i < probe_cnt; i++)
+    {
+        float temp_celsius = m_dt.getTempCByIndex(i);
+        out += CDevice::get_status_str();
+        out += "probe" + String(i) + ":temp:";
+        out += String(int(celsius_to_fahrenheit(temp_celsius)));
+        out += "\n";
+    }
             
     return out;   
 }
