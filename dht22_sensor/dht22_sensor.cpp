@@ -3,6 +3,15 @@
 
 #include "dht22_sensor.h"
 
+void CDht22Sensor::set_pin(int pin) 
+{
+    CDevice::set_pin(pin); 
+
+    pinMode(pin, INPUT);
+    
+    DHT_DBGMSG("Pin set, declared input")
+}
+
 String CDht22Sensor::get_status_str()
 {
     double temp = 0.0;
