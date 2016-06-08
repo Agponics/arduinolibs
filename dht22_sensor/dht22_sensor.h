@@ -23,6 +23,7 @@ class CDht22Sensor : public CDevice
 {
 public: 
     CDht22Sensor() : CDevice() {}
+    void   set_pin(int pin); 
     String get_status_str();
 private:
     static double celsius_to_fahrenheit(double c) {return (c * (9.0/5.0) + 32.0);}
