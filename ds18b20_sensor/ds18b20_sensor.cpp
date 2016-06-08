@@ -27,10 +27,10 @@ String CDs18b20Sensor::get_status_str()
 
     for (uint8_t i = 0; i < probe_cnt; i++)
     {
-        float temp_celsius = m_dt.getTempCByIndex(i);
+        temp = m_dt.getTempFByIndex(i);
         out += CDevice::get_status_str();
         out += "probe" + String(i) + ":temp:";
-        out += String(int(celsius_to_fahrenheit(temp_celsius)));
+        out += String(int(temp));
         out += "\n";
     }
             
