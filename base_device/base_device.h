@@ -15,7 +15,7 @@ public:
     void   set_name(String name)   {m_name = name;}
     int    get_pin()               {return m_pin_id;}
     String get_name()              {return m_name;}
-    String get_status_str()        {return get_name() + String("(pin") + String(get_pin()) + String(")");}
+    String get_status_str()        {return get_name();}
 private:
     int       m_pin_id; // the Arduino pin for this device
     String    m_name;   // a unique name to refer to this device
