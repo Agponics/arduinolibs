@@ -8,36 +8,49 @@ void CDs18b20Sensor::set_pin(int pin)
     CDevice::set_pin(pin); 
 
     m_one_wire = OneWire(pin); 
-    m_dt       = DallasTemperature(&m_one_wire);
 
+    m_dt.setOneWire(&m_one_wire);
     m_dt.begin();
+
+    m_device_cnt = m_dt.getDeviceCount();
+    if (m_device_cnt > MAX_PROBES)
+    {
+        m_device_cnt = MAX_PROBES;
+    }
+
+    for (uint8_t i = 0; i < m_device_cnt; i++)
+    {
+        if (!m_dt.getAddress(m_addrs[i], i))
+        {
+            DS18B20_DBGMSG("Failed to get address!")
+        }
+    }
 }
 
 String CDs18b20Sensor::get_status_str()
 {
-    double  temp = 0.0;
-    uint8_t probe_cnt = 0;
-    
+    float temp = 0.0;
     String out = "";
 
     // have all probes read temp
     m_dt.requestTemperatures();
 
-    probe_cnt = m_dt.getDeviceCount();
-
-    for (uint8_t i = 0; i < probe_cnt; i++)
+    for (uint8_t i = 0; i < m_device_cnt; i++)
     {
-        temp = m_dt.getTempFByIndex(i);
+        temp = m_dt.getTempF(m_addrs[i]);
         out += CDevice::get_status_str();
         out += "probe" + String(i) + ":temp:";
         out += String(int(temp));
-        out += "\n";
+        if (i < m_device_cnt - 1)
+        {
+            out += "\n";
+        }
     }
             
     return out;   
 }
 
-String CDs18b20Sensor::get_addrs()
+String CDs18b20Sensor::get_addrs_str()
 {
     uint8_t next_addr[8] = {0};
     uint8_t i = 0;
