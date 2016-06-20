@@ -39,7 +39,7 @@ String CDs18b20Sensor::get_status_str()
     {
         temp = m_dt.getTempF(m_addrs[i]);
         out += CDevice::get_status_str();
-        out += "probe" + String(i) + ":temp:";
+        out += "probe" + String(i) + "temp:";
         out += String(int(temp));
         if (i < m_device_cnt - 1)
         {
