@@ -34,9 +34,9 @@ boolean read_command(String& cmd);
 
 // parses a simple command string from the serial port
 // GET: the caller wants a detailed status reported from the arduino for all attached devices and sensors
-// SET:[index]:[enable (0 or 1)]: the caller wants the arduino to enable or disable a relay switch 
+// SET:[switch_name]:[enable (0 or 1)]: the caller wants the arduino to enable or disable a relay switch 
 
-unsigned int parse_command(String cmd, unsigned int& switch_index, boolean& enable);
+unsigned int parse_command(String cmd, String& switch_name, boolean& enable);
 
 #endif // __CMD_PROTOCOL_H__
 

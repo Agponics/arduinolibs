@@ -14,7 +14,7 @@ void CHcsr04Sensor::set_pin(int pin)
 String CHcsr04Sensor::get_status_str()
 {
     float duration = 0.0;
-    String out = "";
+    String out = CDevice::get_status_str() + ":";
 
     HCSR04_DBGMSG("Pulsing Trigger: pin " + String(get_trigger_pin()))
 
@@ -30,7 +30,7 @@ String CHcsr04Sensor::get_status_str()
     
     // since this doesn't need to be super accurate just use the standard 74 microseconds per inch
     // for the speed of sound
-    out += CDevice::get_status_str() + "distance:" + String(int(duration / 74 / 2));
+    out += String(int(duration / 74 / 2));
             
     return out;   
 }

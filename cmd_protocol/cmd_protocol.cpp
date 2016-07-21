@@ -26,11 +26,9 @@ boolean read_command(String& cmd)
     return true;
 }
 
-unsigned int parse_command(String cmd, unsigned int& switch_index, boolean& enable)
+unsigned int parse_command(String cmd, String& switch_name, boolean& enable)
 {
     CmdType op_type = INVALID;
-
-    cmd.toLowerCase();
     
     if (cmd.startsWith("get"))
     {
@@ -42,9 +40,8 @@ unsigned int parse_command(String cmd, unsigned int& switch_index, boolean& enab
       
         int index1 = -1;   // index within the command of the first ':'
         int index2 = -1;   // index within the command of the second ':'
-        String str_idx;    // the desired relay to control (as a string)
+        String str_name;   // the desired relay to control (as a string)
         String str_enable; // whether to enable/disable the relay (as a string)
-        int switch_idx = 0;  // the converted index (from string to int)
         
         do
         {
@@ -65,19 +62,17 @@ unsigned int parse_command(String cmd, unsigned int& switch_index, boolean& enab
                 break;
             }
             
-            // switch index is after the first ':'
-            str_idx = cmd.substring(index1 + 1, index2);
+            // switch name is after the first ':'
+            str_name = cmd.substring(index1 + 1, index2);
             //CMD_PROTOCOL_DBGMSG( (String("switch index as a string: ") + str_idx) ) 
             
             // enable/disable parameter is after the second ':'
             str_enable = cmd.substring(index2 + 1); 
             //CMD_PROTOCOL_DBGMSG( (String("enable/disable as a string: ") + str_enable) ) 
             
-            // convert strings to integers
-            switch_idx = str_idx.toInt();
             
             // set output parameters
-            switch_index = switch_idx;
+            switch_name = str_name;
             enable = (str_enable.toInt() != 0);
             
             op_type = SET;
